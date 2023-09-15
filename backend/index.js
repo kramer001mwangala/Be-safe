@@ -2,53 +2,54 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 const cors = require("cors");
-const { sendSTKPush } = require("./controllers/stk");
+const { sendSTKPush, callBackURL } = require("./controllers/stk");
 const app = express();
 const PORT = 8000;
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 
 // db
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "crud",
-// });
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "crud",
+});
 
-// db.connect((err) => {
-//   if (err) {
-//     console.error("Error connecting to MySQL database: ", err);
-//     return;
-//   }
-//   console.log("Connected to MySQL database");
-// });
+db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL database: ", err);
+    return;
+  }
+  console.log("Connected to MySQL database");
+});
 
 // bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const UssdMenu = require("ussd-builder");
 
-// app.get("/", (req, res) => {
-//   res.send("Success Message");
-// });
+app.get("/", (req, res) => {
+  res.send("Success Message");
+});
 
-// app.get("/incidents", (req, res) => {
-//   const sql = "SELECT * FROM incident";
-//   db.query(sql, (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json(data);
-//   });
-// });
+app.get("/incidents", (req, res) => {
+  const sql = "SELECT * FROM incident";
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
-// app.get("/volunteers", (req, res) => {
-//   const sql = "SELECT * FROM volunteers";
-//   db.query(sql, (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json(data);
-//   });
-// });
+app.get("/volunteers", (req, res) => {
+  const sql = "SELECT * FROM volunteers";
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 let menu = new UssdMenu();
 
@@ -253,11 +254,9 @@ app.post("/ussd", (req, res) => {
   });
 });
 
-// Set your app credentials
-const credentials = {
-  apiKey: "MyAppAPIkey",
-  username: "MyAppUsername",
-};
+app.post("/api/mpesa/callbackurl", async (req, res) => {
+  res.send(await callBackURL(req.body));
+});
 
 app.listen(PORT, () => {
   console.log("App is listening on port: ", PORT);
