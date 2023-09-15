@@ -8,7 +8,7 @@ const accessToken = (req, res) => {
   res.status(200).json({ access_token: req.access_token });
 };
 
-const sendSTKPush = ({ phoneNumber, Amount }) => {
+const sendSTKPush = ({ phoneNumber, amount }) => {
   return new Promise(async (resolve, reject) => {
     let url = process.env.endpoint_stk_push;
     let getAccessToken = await get_access_token();
@@ -30,12 +30,12 @@ const sendSTKPush = ({ phoneNumber, Amount }) => {
           Password: password,
           Timestamp: timeStamp,
           TransactionType: "CustomerPayBillOnline",
-          Amount: Amount,
+          Amount: amount,
           PartyA: phoneNumber,
           PartyB: shortCode,
           PhoneNumber: phoneNumber,
           CallBackURL:
-            "https://a077-105-163-16-56.in.ngrok.io/api/mpesa/callbackurl",
+            "https://2b1e-196-216-66-82.ngrok-free.app/api/mpesa/callbackurl",
           AccountReference: "Test",
           TransactionDesc: "Test",
         },
@@ -57,10 +57,10 @@ const sendSTKPush = ({ phoneNumber, Amount }) => {
   });
 };
 
-const callBackURL = async (req, res) => {
-  let checkoutCode = req.body.Body.stkCallback.ResultCode;
+const callBackURL = async (body) => {
+  let checkoutCode = body.Body.stkCallback.ResultCode;
   if (checkoutCode === 0) {
-    let metadata = req.body.Body.stkCallback.CallbackMetadata.Item;
+    let metadata = body.Body.stkCallback.CallbackMetadata.Item;
 
     function mapMetadata(metadata) {
       return metadata.reduce((result, entry) => {
@@ -73,6 +73,15 @@ const callBackURL = async (req, res) => {
     const { Amount, TransactionDate, MpesaReceiptNumber, PhoneNumber } =
       mappedResult;
 
+    console.log(
+      Amount,
+      "\n",
+      TransactionDate,
+      "\n",
+      MpesaReceiptNumber,
+      "\n",
+      PhoneNumber
+    );
     // const newPayment = new Payment({
     //   amount: Amount,
     //   phoneNumber: PhoneNumber,
@@ -81,7 +90,7 @@ const callBackURL = async (req, res) => {
     // });
     // newPayment.save();
   } else {
-    console.log(req.body.Body.stkCallback.ResultDesc);
+    console.log(body.Body.stkCallback.ResultDesc);
   }
 };
 
