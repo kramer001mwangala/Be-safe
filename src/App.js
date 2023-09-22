@@ -4,6 +4,7 @@ import Volunteer from './Components/Volunteer';
 import Incidents from './Components/Incidents';
 import Donors from './Components/Donors';
 import Sidebar from './Components/Sidebar';
+import Approved from './Components/Approved';
 
 function App() {
   return (
@@ -18,8 +19,7 @@ function App() {
         <Routes>
 
           <Route path='/' element={<Incidents />}></Route>
-          <Route path='/approved ' element={<Incidents />}></Route>
-
+          <Route path='/approved' element={<Approved/>}></Route>
           <Route path='/volunteer' element={<Volunteer />}></Route>
           <Route path='/donors' element={<Donors />}></Route>
           
