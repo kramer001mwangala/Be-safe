@@ -219,7 +219,7 @@ menu.state("volunteer_Reason", {
 menu.state("Latest security update", {
   run: () => {
     menu.end(
-      "Here is Latest security update A girl was robbed on a matatu along thika road.The kidnappers took all of her bellongings and left her stranded in MUthurwe  link to website for more updates"
+      "Here is Latest security update A girl was robbed on a matatu along thika road.The kidnappers took all of her belongings and left her stranded in MUthurwe  link to website for more updates"
     );
   },
 });
