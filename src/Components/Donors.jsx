@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 function Donors() {
 const [data,setData]=useState([])
@@ -14,7 +14,7 @@ const [data,setData]=useState([])
     
   return (
     <div className='d-flex vh-100  justify-content-center align-items-center'>
-<div className='w-75 bg-white rounded p-3'>
+<div className='w-50 bg-white rounded p-3'>
     {/* <Link to="/create"className="btn btn-success"> Add +</Link> */}
    
     <table className='table'>

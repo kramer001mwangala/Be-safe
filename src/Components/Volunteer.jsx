@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 function Volunteer() {
 const [data,setData]=useState([])
@@ -13,9 +13,9 @@ const [data,setData]=useState([])
     },[]) 
 
 
-const sendmessage=async(id)=>{
+// const sendmessage=async(id)=>{
 
-}
+// }
     
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center'>
