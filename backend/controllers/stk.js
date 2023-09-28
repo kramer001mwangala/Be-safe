@@ -35,12 +35,12 @@ const sendSTKPush = ({ phoneNumber, amount }) => {
           PartyB: shortCode,
           PhoneNumber: phoneNumber,
           CallBackURL:
-            "https://2b1e-196-216-66-82.ngrok-free.app/api/mpesa/callbackurl",//mine ngrok
+            "https://a69a-41-139-168-163.ngrok-free.app/api/mpesa/callbackurl",//mine ngrok
           AccountReference: "Test",
           TransactionDesc: "Test",
         },
       },
-      (err, resp, body) => {
+      (err, resp, body) => { 
         if (err) {
           reject({
             status: false,

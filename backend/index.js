@@ -51,12 +51,21 @@ app.get("/volunteers", (req, res) => {
   });
 });
 
+
+app.get("/shessafedonations", (req, res) => {
+  const sql = "SELECT * FROM shessafedonations";
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 let menu = new UssdMenu();
 
 let dataToSave = {};
 
 const atCredentials = {
-  apiKey: "319f88a0b2bb07dd74cf49fe141f3ec3dd60b4893cc0dbd54ce97d6f7133ae58",
+  apiKey: "21671896cf1cc083a2379966f585cf0b9e81062c17d63dae77e89ffefc01cf11",
   username: "jeezz",
 };
 
@@ -93,6 +102,8 @@ menu.state("Report An Incident", {
 
 menu.state("name", {
   run: () => {
+      let phoneNumber = menu.args.phoneNumber;
+        dataToSave.phoneNumber = phoneNumber;
     let name = menu.val;
     dataToSave.name = name;
     console.log(dataToSave);
@@ -137,11 +148,23 @@ menu.state("Incident_descprition", {
   run: async () => {
     let Incident_descprition = menu.val;
     dataToSave.Incident_descprition = Incident_descprition;
+
+    // Save the data to the MySQL database
+    const sql = "INSERT INTO `incident`(`Name`, `PhoneNumber`, `Location`, `incident_date`, `incident_descr`) VALUES (?, ?, ?, ?,?)";
+    const values = [dataToSave.name,dataToSave.phoneNumber, dataToSave.Incident_location, dataToSave._date, dataToSave.Incident_descprition ];
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error saving data to database:", err);
+      } else {
+        console.log("Data saved to database. Insert ID:", result.insertId);
+      }
+    });
     const options = {
       to: menu.args.phoneNumber,
-      message: `Hi ${dataToSave.name},  Thank you for reporting the incident. Our team will take appropriate action.`,
+      message: `Hi ${dataToSave.name},  Thank you for reporting the incident. Visit our page she'ssafe.com To stay updated.`,
     };
-    sms.send(options).then(console.log).catch(console.log);
+    //sms.send(options).then(console.log).catch(console.log);
 
     await sms
       .send(options)
@@ -166,6 +189,8 @@ menu.state("Volunteer", {
 });
 menu.state("Full_Names", {
   run: () => {
+    let phoneNumber = menu.args.phoneNumber;
+    dataToSave.phoneNumber = phoneNumber;
     let Full_Names = menu.val;
     dataToSave.Full_Names = Full_Names;
     console.log(dataToSave);
@@ -195,13 +220,28 @@ menu.state("Residence_Area", {
 
 menu.state("volunteer_Reason", {
   run: async () => {
+    
     let volunteer_Reason = menu.val;
     dataToSave.volunteer_Reason = volunteer_Reason;
     const options = {
       to: menu.args.phoneNumber,
       message: `Hi ${dataToSave.Full_Names},  Thank you for applying as a volunteer`,
     };
-    sms.send(options).then(console.log).catch(console.log);
+    //sms.send(options).then(console.log).catch(console.log);
+
+    
+    // Save the volunteer data to the MySQL database
+    const sql = "INSERT INTO `volunteers`( `FullNames`, `AreaofResidence`, `ReasonOfvolunteer`, `Phonumber`) VALUES (?, ?, ?, ?)";
+    const values = [dataToSave.Full_Names, dataToSave.Residence_Area, dataToSave.volunteer_Reason, dataToSave.phoneNumber];
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error saving volunteer data to database:", err);
+      } else {
+        console.log("Volunteer data saved to database. Insert ID:", result.insertId);
+      }
+    });
+
 
     await sms
       .send(options)
