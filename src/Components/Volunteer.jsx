@@ -27,6 +27,7 @@ const [data,setData]=useState([])
             <tr>
             <th>ID</th>
             <th>FullNames</th>
+            <th>PhoneNumber</th>
             <th>AreaOfResidence</th>
             <th>VolunteerReason</th>
             
@@ -39,6 +40,7 @@ const [data,setData]=useState([])
          <tr key={i}>
              <td>{data.ID}</td>
             <td>{data.FullNames}</td>
+            <td>{data.Phonumber}</td>
             <td>{data.AreaofResidence}</td>
             <td>{data.ReasonOfvolunteer}</td>
            
