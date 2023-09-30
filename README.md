@@ -12,9 +12,11 @@ This willl make you be able to acess the ussd through AT sandbox
 
 
 For the admin dashborad cd secre frontend  and run npm start the development server will be shown
-![image](https://github.com/Kazenzi/Be-safe/assets/60341573/2928e61a-84e7-4ea9-a42b-00896274c4b1)
-![image](https://github.com/Kazenzi/Be-safe/assets/60341573/ef58d636-79f6-42c2-869f-e41db3b92fc7)
-![image](https://github.com/Kazenzi/Be-safe/assets/60341573/28082509-aea0-4e7a-82ef-cf5e5aafd95d)
+![image](https://github.com/Kazenzi/Be-safe/assets/60341573/9f2661c1-86ac-4ca6-a026-c5148c20c3f2)
+![image](https://github.com/Kazenzi/Be-safe/assets/60341573/dfa45441-5399-4d48-a1b1-3406d84248be)
+
+![image](https://github.com/Kazenzi/Be-safe/assets/60341573/0a26605a-6309-417c-87f3-fe0acd81826d)
+
 ![image](https://github.com/Kazenzi/Be-safe/assets/60341573/240464cb-2b77-436c-a930-56e2204553aa)
 
 you cna view the ussd as dialed
