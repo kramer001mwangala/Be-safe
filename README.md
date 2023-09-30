@@ -17,4 +17,8 @@ For the admin dashborad cd secre frontend  and run npm start the development ser
 ![image](https://github.com/Kazenzi/Be-safe/assets/60341573/28082509-aea0-4e7a-82ef-cf5e5aafd95d)
 ![image](https://github.com/Kazenzi/Be-safe/assets/60341573/240464cb-2b77-436c-a930-56e2204553aa)
 
+you cna view the ussd as dialed
+![image](https://github.com/Kazenzi/Be-safe/assets/60341573/4b8ac782-bf59-454c-9861-95bd13be580e)
+
+
 
